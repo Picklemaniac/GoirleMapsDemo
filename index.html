@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Goirle Maps</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin=""></script>
+  <style>
+    /* Set the map to fill the entire window */
+    body {
+      background: black;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+  const map = L.map('map').setView([51.5237, 5.0642], 16);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  const locs = [
+    {"long":51.52269968911922, "lat":5.0643584629771805, "text": "Dorpstraat 4a", "scary": false},
+    {"long":51.524908844468825, "lat":5.068264015446866, "text": "Henri Duane Straat 11", "scary": true},
+    {"long":51.525481192799305, "lat":5.069019729628418, "text": "Henri Duane Straat 10", "scary": false},
+    {"long":51.52282398875921, "lat":5.072769860740105, "text": "Kortevorenstraat 6", "scary": true},
+  ]
+
+  locs.forEach(item => {
+    let marker = L.marker([item.long, item.lat]).addTo(map);
+    marker.bindPopup(`<b>${item.text}</b>.`)
+  });
+</script>
+</body>
+</html>
